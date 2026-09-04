@@ -1,1 +1,3 @@
-TOKEN = None
+import os
+
+TOKEN = os.getenv("TOKEN")

@@ -22,16 +22,26 @@ class MyBot(commands.Bot):
                     print(f"Hata: {filename} → {e}")
 
         # Kalıcı butonlar - bot yeniden başlasa bile butonlar çalışsın diye
-                from cogs.registration import KayitButonView, OnayView
+        from cogs.registration import KayitButonView, OnayView
         from cogs.tickets import TicketPanelView, CloseTicketView
-        from cogs.market import MarketView, TotemView   # 👈 EKLE
+        from cogs.market import MarketView, TotemView
+
+        # Yeni eklenenler
+        from cogs.vs_talep import VSSetupView, VSChannelView
+        from cogs.yardim_bekleme import WaitingLogView, AfterTakeView
 
         self.add_view(KayitButonView())
         self.add_view(OnayView())
         self.add_view(TicketPanelView())
         self.add_view(CloseTicketView())
-        self.add_view(MarketView())    # 👈 EKLE
-        self.add_view(TotemView())     # 👈 EKLE
+        self.add_view(MarketView())
+        self.add_view(TotemView())
+
+        # Yeni view'lar
+        self.add_view(VSSetupView())
+        self.add_view(VSChannelView())
+        self.add_view(WaitingLogView(0))
+        self.add_view(AfterTakeView(0, 0, None))
 
         guild = discord.Object(id=GUILD_ID)
         self.tree.copy_global_to(guild=guild)
